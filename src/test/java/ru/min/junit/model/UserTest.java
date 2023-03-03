@@ -9,6 +9,8 @@ class UserTest {
 
     public static final String LOGIN = "login";
     public static final String EMAIL = "email@email.com";
+    public static final String INCORRECT_EMAIL = "emailemailcom";
+    public static final String INCORRECT_LOGIN = "emailemailcom";
     User user;
     User user1;
 
@@ -32,13 +34,12 @@ class UserTest {
 
     @Test
     void checkEmailIsCorrect(){
-        assertTrue(user.getEmail().contains("@"));
-        assertTrue(user.getEmail().contains("."));
+        assertThrows(IllegalArgumentException.class, () -> {new User(LOGIN, INCORRECT_EMAIL);});
     }
 
     @Test
     void checkLoginAndEmailIsNotEquals(){
-        assertFalse(user.getEmail().equals(user.getLogin()));
+        assertThrows(IllegalArgumentException.class, () -> {new User(INCORRECT_LOGIN, INCORRECT_EMAIL);});
     }
 
 }
