@@ -23,8 +23,7 @@ SELECT first_name AS Имя, SUM(age) FROM employee GROUP BY first_name;
 SELECT first_name AS имя, age AS возраст FROM employee WHERE age = (SELECT MIN(age) FROM employee);
 
 SELECT first_name AS имя, MAX(age) AS возраст FROM employee
-WHERE first_name IN (SELECT first_name FROM employee GROUP BY first_name HAVING COUNT(*) > 1)
-GROUP BY имя
+HAVING count(first_name)>1
 ORDER BY возраст DESC;
 
 
